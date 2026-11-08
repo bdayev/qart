@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Face ID Demo</title>
+<title>HAYK TEQNO Demo</title>
 
 <style>
 * {
@@ -24,7 +24,7 @@ body {
 }
 
 .card {
-    width: 360px;
+    width: 395px;
     max-width: 100%;
     background: #f5f5f7;
     border-radius: 28px;
@@ -33,9 +33,17 @@ body {
     box-shadow: 0 20px 60px #0008;
 }
 
+.logo {
+    width: 250px;
+    height: auto;
+    object-fit: contain;
+    margin: 0 auto 15px;
+    display: block;
+}
+
 h1 {
-    font-size: 25px;
-    margin-bottom: 10px;
+    font-size: 27px;
+    margin-bottom: 8px;
 }
 
 .subtitle {
@@ -47,7 +55,6 @@ h1 {
     width: 110px;
     height: 110px;
     margin: 35px auto;
-    color: #111;
 }
 
 .face svg {
@@ -87,42 +94,6 @@ button:disabled {
     opacity: .6;
 }
 
-.result {
-    display: none;
-    margin-top: 25px;
-    animation: appear .6s ease;
-}
-
-.debt {
-    background: linear-gradient(135deg,#252525,#555);
-    color: white;
-    border-radius: 18px;
-    padding: 25px 10px;
-    margin-bottom: 18px;
-}
-
-.debt h2 {
-    font-size: 32px;
-    margin-top: 12px;
-}
-
-.account {
-    padding: 18px;
-    background: #e8e8ed;
-    border-radius: 15px;
-    text-align: left;
-}
-
-.account p {
-    margin: 8px 0;
-}
-
-.balance {
-    color: #dc2626;
-    font-weight: bold;
-    font-size: 18px;
-}
-
 .loader {
     width: 35px;
     height: 35px;
@@ -138,14 +109,89 @@ button:disabled {
 }
 
 @keyframes appear {
-    from { opacity: 0; transform: translateY(15px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.result {
+    display: none;
+    margin-top: 25px;
+    animation: appear .6s ease;
+}
+
+/* HAYK TEQNO DEMO RECEIPT */
+
+.receipt {
+    background: white;
+    border-radius: 18px;
+    padding: 24px 18px;
+    text-align: left;
+    box-shadow: 0 5px 20px #0001;
+    border: 1px dashed #bbb;
+}
+
+.receipt-title {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.receipt-subtitle {
+    text-align: center;
+    color: #888;
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+
+.receipt-line {
+    border-top: 1px dashed #ccc;
+    margin: 15px 0;
+}
+
+.receipt p {
+    font-size: 14px;
+    color: #444;
+    margin: 12px 0;
+    line-height: 1.5;
+}
+
+.receipt strong {
+    color: #222;
+}
+
+.receipt-total {
+    text-align: center;
+    font-size: 27px;
+    font-weight: bold;
+    color: #159447;
+    margin: 18px 0;
+}
+
+.success {
+    text-align: center;
+    color: #159447;
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 18px;
 }
 
 .demo {
+    color: #999;
     font-size: 10px;
-    color: #888;
+    line-height: 1.6;
     margin-top: 20px;
+}
+
+.demo-warning {
+    color: #dc2626;
+    font-weight: bold;
 }
 </style>
 </head>
@@ -154,13 +200,24 @@ button:disabled {
 
 <div class="card">
 
+    <!-- LOGO -->
+    <img
+        class="logo"
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuBl3UVivf8VFVsha-XgCYsUTlF4Q5jydo-nmrtAyKnRIbXrIBubzR4E4&s=10"
+        alt="Logo"
+    >
+
     <h1>Face ID</h1>
-    <p class="subtitle">Identity verification demo</p>
+    <p class="subtitle">Identity Verification </p>
+
+    <!-- FACE ID -->
 
     <div class="face" id="face">
         <svg viewBox="0 0 100 100">
-            <g fill="none" stroke="currentColor"
-               stroke-width="5" stroke-linecap="round">
+            <g fill="none"
+               stroke="#111"
+               stroke-width="5"
+               stroke-linecap="round">
 
                 <path d="M35 10 H20 Q10 10 10 20 V35"/>
                 <path d="M65 10 H80 Q90 10 90 20 V35"/>
@@ -170,8 +227,10 @@ button:disabled {
                 <path d="M35 42 Q50 30 65 42"/>
                 <path d="M35 60 Q50 72 65 60"/>
 
-                <path class="scan" d="M15 50 H85"
-                      stroke="#2585ff" stroke-width="3"/>
+                <path class="scan"
+                      d="M15 50 H85"
+                      stroke="#2585ff"
+                      stroke-width="3"/>
             </g>
         </svg>
     </div>
@@ -184,40 +243,83 @@ button:disabled {
         Սկսել Face ID
     </button>
 
+    <!-- LOADING -->
+
     <div id="loading" style="display:none">
         <div class="loader"></div>
-        <p>Բեռնում ենք դեմո տվյալները...</p>
+        <p>Բեռնում ենք  կտրոնը...</p>
     </div>
+
+    <!-- FINAL RECEIPT -->
 
     <div class="result" id="result">
 
-        <h2 style="margin-bottom:20px">
-            Գայանե Աղասարյան
-        </h2>
+        <div class="receipt">
 
-        <div class="debt">
-            <small>Կատակային պարտքի գումար</small>
-            <h2>10,000,000 ֏</h2>
-        </div>
+            <div class="receipt-title">
+                HAYK TEQNO
+            </div>
 
-        <div class="account">
-            <p>Քարտ՝ ****3778</p>
-            <p class="balance">
-                Մնացորդ՝ -11,200,000 ֏
+            <div class="receipt-subtitle">
+                Աշխատավարձի վճարման  կտրոն
+            </div>
+
+            <div class="receipt-line"></div>
+
+            <p>
+                <strong>Վճարող՝</strong>
+                HAYK TEQNOLOG
             </p>
+
+            <p>
+                <strong>Երկիր՝</strong>
+                Աֆրիկա
+            </p>
+
+            <p>
+                <strong>Նշանակություն՝</strong>
+                Աշխատավարձի վճարում
+            </p>
+
+            <div class="receipt-line"></div>
+
+            <p style="text-align:center">
+                <strong>Աշխատավարձի գումար</strong>
+            </p>
+
+            <div class="receipt-total">
+                483,800 ֏
+            </div>
+
+            <div class="receipt-line"></div>
+
+            <div class="success">
+                ✓  SUCCESS
+            </div>
+
         </div>
+
+        <p class="demo-warning" style="margin-top:15px;font-size:11px">
+             ԿՏՐՈՆ
+            <br>
+            ՎՃԱՐՈՒՄ 
+        </p>
 
     </div>
 
     <p class="demo">
-        ԿԱՏԱԿԱՅԻՆ ԴԵՄՈ — ՈՉ ԻՐԱԿԱՆ FACE ID
-        <br>ՈՉ ԻՐԱԿԱՆ ՖԻՆԱՆՍԱԿԱՆ ՏՎՅԱԼՆԵՐ
+      
+        <br>
+       
+        <br>
+       
+        <br>
+        ՖԻՆԱՆՍԱԿԱՆ ԿՏՐՈՆ
     </p>
 
 </div>
 
 <script>
-
 function verify() {
 
     const btn = document.getElementById("btn");
@@ -228,6 +330,7 @@ function verify() {
 
     btn.disabled = true;
     btn.innerText = "Սկանավորում...";
+
     status.innerText = "Face ID-ի դեմո սկանավորում...";
 
     setTimeout(() => {
@@ -235,10 +338,15 @@ function verify() {
         face.innerHTML = `
             <svg viewBox="0 0 100 100">
                 <circle cx="50" cy="50" r="40"
-                    fill="none" stroke="#16a34a" stroke-width="5"/>
+                    fill="none"
+                    stroke="#16a34a"
+                    stroke-width="5"/>
+
                 <path d="M28 51 L44 66 L73 35"
-                    fill="none" stroke="#16a34a"
-                    stroke-width="7" stroke-linecap="round"
+                    fill="none"
+                    stroke="#16a34a"
+                    stroke-width="7"
+                    stroke-linecap="round"
                     stroke-linejoin="round"/>
             </svg>
         `;
@@ -265,7 +373,6 @@ function verify() {
 
     }, 3000);
 }
-
 </script>
 
 </body>
