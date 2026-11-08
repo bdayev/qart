@@ -1,0 +1,272 @@
+
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Face ID Demo</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg,#10152f,#303f9f,#7986ff);
+    padding: 20px;
+}
+
+.card {
+    width: 360px;
+    max-width: 100%;
+    background: #f5f5f7;
+    border-radius: 28px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 20px 60px #0008;
+}
+
+h1 {
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #777;
+    margin-bottom: 25px;
+}
+
+.face {
+    width: 110px;
+    height: 110px;
+    margin: 35px auto;
+    color: #111;
+}
+
+.face svg {
+    width: 100%;
+    height: 100%;
+}
+
+.scan {
+    animation: scanning 1.5s infinite;
+}
+
+@keyframes scanning {
+    0% { transform: translateY(0); opacity: .2; }
+    50% { opacity: 1; }
+    100% { transform: translateY(35px); opacity: .2; }
+}
+
+.status {
+    margin: 20px 0;
+    color: #777;
+    min-height: 22px;
+}
+
+button {
+    width: 100%;
+    height: 55px;
+    border: none;
+    border-radius: 15px;
+    background: #111;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:disabled {
+    opacity: .6;
+}
+
+.result {
+    display: none;
+    margin-top: 25px;
+    animation: appear .6s ease;
+}
+
+.debt {
+    background: linear-gradient(135deg,#252525,#555);
+    color: white;
+    border-radius: 18px;
+    padding: 25px 10px;
+    margin-bottom: 18px;
+}
+
+.debt h2 {
+    font-size: 32px;
+    margin-top: 12px;
+}
+
+.account {
+    padding: 18px;
+    background: #e8e8ed;
+    border-radius: 15px;
+    text-align: left;
+}
+
+.account p {
+    margin: 8px 0;
+}
+
+.balance {
+    color: #dc2626;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.loader {
+    width: 35px;
+    height: 35px;
+    border: 4px solid #ddd;
+    border-top: 4px solid #303f9f;
+    border-radius: 50%;
+    margin: 20px auto;
+    animation: spin .8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes appear {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.demo {
+    font-size: 10px;
+    color: #888;
+    margin-top: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <h1>Face ID</h1>
+    <p class="subtitle">Identity verification demo</p>
+
+    <div class="face" id="face">
+        <svg viewBox="0 0 100 100">
+            <g fill="none" stroke="currentColor"
+               stroke-width="5" stroke-linecap="round">
+
+                <path d="M35 10 H20 Q10 10 10 20 V35"/>
+                <path d="M65 10 H80 Q90 10 90 20 V35"/>
+                <path d="M10 65 V80 Q10 90 20 90 H35"/>
+                <path d="M90 65 V80 Q90 90 80 90 H65"/>
+
+                <path d="M35 42 Q50 30 65 42"/>
+                <path d="M35 60 Q50 72 65 60"/>
+
+                <path class="scan" d="M15 50 H85"
+                      stroke="#2585ff" stroke-width="3"/>
+            </g>
+        </svg>
+    </div>
+
+    <p class="status" id="status">
+        Սեղմիր՝ սկանավորումը սկսելու համար
+    </p>
+
+    <button id="btn" onclick="verify()">
+        Սկսել Face ID
+    </button>
+
+    <div id="loading" style="display:none">
+        <div class="loader"></div>
+        <p>Բեռնում ենք դեմո տվյալները...</p>
+    </div>
+
+    <div class="result" id="result">
+
+        <h2 style="margin-bottom:20px">
+            Գայանե Աղասարյան
+        </h2>
+
+        <div class="debt">
+            <small>Կատակային պարտքի գումար</small>
+            <h2>10,000,000 ֏</h2>
+        </div>
+
+        <div class="account">
+            <p>Քարտ՝ ****3778</p>
+            <p class="balance">
+                Մնացորդ՝ -11,200,000 ֏
+            </p>
+        </div>
+
+    </div>
+
+    <p class="demo">
+        ԿԱՏԱԿԱՅԻՆ ԴԵՄՈ — ՈՉ ԻՐԱԿԱՆ FACE ID
+        <br>ՈՉ ԻՐԱԿԱՆ ՖԻՆԱՆՍԱԿԱՆ ՏՎՅԱԼՆԵՐ
+    </p>
+
+</div>
+
+<script>
+
+function verify() {
+
+    const btn = document.getElementById("btn");
+    const status = document.getElementById("status");
+    const face = document.getElementById("face");
+    const loading = document.getElementById("loading");
+    const result = document.getElementById("result");
+
+    btn.disabled = true;
+    btn.innerText = "Սկանավորում...";
+    status.innerText = "Face ID-ի դեմո սկանավորում...";
+
+    setTimeout(() => {
+
+        face.innerHTML = `
+            <svg viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="40"
+                    fill="none" stroke="#16a34a" stroke-width="5"/>
+                <path d="M28 51 L44 66 L73 35"
+                    fill="none" stroke="#16a34a"
+                    stroke-width="7" stroke-linecap="round"
+                    stroke-linejoin="round"/>
+            </svg>
+        `;
+
+        status.innerText = "✓ Դեմո սկանավորումն ավարտված է";
+        status.style.color = "#16a34a";
+
+        btn.style.display = "none";
+
+        setTimeout(() => {
+
+            face.style.display = "none";
+            status.style.display = "none";
+            loading.style.display = "block";
+
+            setTimeout(() => {
+
+                loading.style.display = "none";
+                result.style.display = "block";
+
+            }, 2500);
+
+        }, 1000);
+
+    }, 3000);
+}
+
+</script>
+
+</body>
+</html>
